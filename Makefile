@@ -7,12 +7,12 @@ EXT = cpp
 # TODO: altere a lista de forma que contenha todos os arquivos .cpp
 #       do seu projeto (sem a extensão), que deve estar no diretório 
 #       src/montador
-SRCS_MONTADOR = $(patsubst %,%.$(EXT),main montador)
+SRCS_MONTADOR = $(patsubst %,%.$(EXT),main montador conversor_instrucoes tabela_simbolos util leitor_arquivos)
 OBJS_MONTADOR = $(patsubst %,build/montador/%.o,$(basename $(SRCS_MONTADOR)))
 # TODO: altere a lista de forma que contenha todos os arquivos .cpp
 #       do seu projeto (sem a extensão), que deve estar no diretório 
 #       src/ligador
-SRCS_LIGADOR = $(patsubst %,%.$(EXT),main ligador)
+SRCS_LIGADOR = $(patsubst %,%.$(EXT),main ligador tabela_simbolos util leitor_arquivos)
 OBJS_LIGADOR = $(patsubst %,build/ligador/%.o,$(basename $(SRCS_LIGADOR)))
 
 ###############################################################################

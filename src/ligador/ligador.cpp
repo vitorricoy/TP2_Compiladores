@@ -2,6 +2,8 @@
 #include "leitor_arquivos.h"
 #include "util.h"
 
+Ligador::Ligador() {}
+
 void Ligador::adicionarPrograma(std::string arquivo) {
     LeitorArquivos leitor(arquivo);
 
@@ -22,7 +24,7 @@ void Ligador::adicionarPrograma(std::string arquivo) {
 
 std::string Ligador::gerarCodigoMaquinaFinal() {
     int deslocamento = 0;
-    for(int i=0; i < tamanhoProgramas.size(); i++) {
+    for(unsigned long i=0; i < tamanhoProgramas.size(); i++) {
         for(int j=0; j < tamanhoProgramas[i]; j++) {
             if(programas[deslocamento + j].front() == 'E') {
                 int posicao = stoi(programas[deslocamento + j].substr(1, programas[deslocamento + j].size()-1));
