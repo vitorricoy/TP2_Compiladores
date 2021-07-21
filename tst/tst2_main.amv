@@ -6,15 +6,16 @@
 main: READ R0            ; Lê o inteiro n e armazena no 
                          ; registrador 0
       STORE R0 x         ; Armazena n na posição de memória "x"
-      loop: LOAD R0 x
+      loop: CALL fib
+            LOAD R0 x
             LOAD R1 n
             SUB R0 R1
             JZ sair
-            CALL fib
             LOAD R1 n
             LOAD R2 const1
             ADD R1 R2
             STORE R1 n
+            JUMP loop
       sair: HALT
 
 const100: WORD 100
