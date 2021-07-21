@@ -70,7 +70,7 @@ std::vector<std::vector<std::string>> Montador::executarPassoUm() {
     return resultado;
 }
 
-std::vector<int> Montador::executarPassoDois(std::vector<std::vector<std::string> > tokens) {
+std::vector<std::string> Montador::executarPassoDois(std::vector<std::vector<std::string> > tokens) {
     // Declara o vetor das strings que compõe o programa final
     std::vector<std::string> resultadoFinal;
     // Inicializa a linha correspondente à instrução atual no programa final
@@ -102,9 +102,8 @@ std::vector<int> Montador::executarPassoDois(std::vector<std::vector<std::string
 }
 
 std::string Montador::gerarPrograma(std::vector<std::string> instrucoes) {
-
     // Coloca a segunda linha do programa
-    saida+=std::to_string(instrucoes.size()) + " ";
+    std::string saida = =std::to_string(instrucoes.size()) + " ";
     saida+=std::to_string(this->constantesInicio) + "\n"; // Considera as constantes no ínicio do programa
     // Coloca os valores das operações do programa
     for(std::string valor : instrucoes) {
