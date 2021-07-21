@@ -5,6 +5,14 @@
 #include "conversor_instrucoes.h"
 #include "tabela_simbolos.h"
 
+bool ehNumero(std::string& s) {
+    auto it = s.begin();
+    while(it != s.end() && std::isdigit(*it)) {
+        it++;
+    }
+    return !s.empty() && it == s.end();
+}
+
 int Conversor::converterOperando(std::string operando, TabelaSimbolos& tabela, int& linhaAtual) {
     // Verifica se o operando é um registrador
     if(operando == "R0") {
@@ -23,13 +31,22 @@ int Conversor::converterOperando(std::string operando, TabelaSimbolos& tabela, i
         return 3;
     }
 
-    // Verifica se o operando é um label válido
+    // Verifica se o operando é um label do próprio programa
     if(tabela.simboloEstaRegistrado(operando)) {
-        return tabela.obterValorSimbolo(operando)-linhaAtual;
+        int enderecoAlvo = stoi(tabela.obterValorSimbolo(operando))-linhaAtual
+        return "E"+to_string(enderecoAlvo);
+    } else {
+        // Se o operando não é um label do próprio programa
+        // Verifica se é uma constante ou um label externo
+        if(ehNumero(operando)) {
+            // O operando é uma posição de memória
+            return "E"+operando;
+        } else {
+            tabela.salvarSimbolo(operando, "ext");
+            return operando;
+        }
     }
-
-    // O operando é uma posição de memória
-    return stoi(operando);
+    
 }
 
 std::vector<int> Conversor::converterInstrucao(std::vector<std::string> instrucao, TabelaSimbolos& tabela, int& linhaAtual, int& constantesVistas) {

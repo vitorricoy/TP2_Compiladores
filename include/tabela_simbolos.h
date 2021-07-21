@@ -6,15 +6,17 @@
 
 class TabelaSimbolos {
     private:
-        std::map<std::string, int> tabela;
+        std::map<std::string, std::string> tabela;
     public:
         TabelaSimbolos();
 
-        int obterValorSimbolo(std::string simbolo);
+        std::string obterValorSimbolo(std::string simbolo);
 
         bool simboloEstaRegistrado(std::string simbolo);
 
-        void salvarSimbolo(std::string simbolo, int valor);
+        void salvarSimbolo(std::string simbolo, std::string valor);
+
+        std::string toString();
 };
 
 #endif

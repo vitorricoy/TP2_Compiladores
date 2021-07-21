@@ -39,7 +39,7 @@ std::vector<std::vector<std::string>> Montador::executarPassoUm() {
 
         // Se a palavra é um token
         if(palavras[0].back() == ':') {
-            tabelaSimbolos.salvarSimbolo(palavras[0].substr(0, palavras[0].size()-1), numeroLinha);
+            tabelaSimbolos.salvarSimbolo(palavras[0].substr(0, palavras[0].size()-1), std::to_string(numeroLinha));
             palavras.erase(palavras.begin());
         }
 
@@ -71,8 +71,8 @@ std::vector<std::vector<std::string>> Montador::executarPassoUm() {
 }
 
 std::vector<int> Montador::executarPassoDois(std::vector<std::vector<std::string> > tokens) {
-    // Declara o vetor dos inteiros que compõe o programa final
-    std::vector<int> resultadoFinal;
+    // Declara o vetor das strings que compõe o programa final
+    std::vector<std::string> resultadoFinal;
     // Inicializa a linha correspondente à instrução atual no programa final
     int linhaAtual = 0;
     // Inicializa as variáveis responsáveis por identificar quantas constantes 
@@ -84,7 +84,7 @@ std::vector<int> Montador::executarPassoDois(std::vector<std::vector<std::string
         // Salva o valor antigo de constantes no inicio do programa
         int constantesInicioAntiga = constantesInicioAux;
         // Converte a instrução dessa linha para o código de máquina do emulador
-        std::vector<int> codigoMaquina = Conversor::converterInstrucao(linha, this->tabelaSimbolos, linhaAtual, constantesInicioAux);
+        std::vector<std::string> codigoMaquina = Conversor::converterInstrucao(linha, this->tabelaSimbolos, linhaAtual, constantesInicioAux);
         // Se na conversão não foi encontrada constante, já encontrou todas as constantes
         // no início do programa
         // Também verifica se já não foram encontradas as constantes do ínicio
@@ -94,26 +94,25 @@ std::vector<int> Montador::executarPassoDois(std::vector<std::vector<std::string
             // Determina que já encontrou todas as constantes no inicio do programa
             encontrouConstantesInicio = true;
         }
-        // Insere os inteiros encontrados no programa final
+        // Insere os valores encontrados no programa final
         resultadoFinal.insert(resultadoFinal.end(), codigoMaquina.begin(), codigoMaquina.end());
     }
-    // Retorna os inteiros do programa final
+    // Retorna os valores do programa final
     return resultadoFinal;
 }
 
-std::string Montador::gerarPrograma(std::vector<int> instrucoes) {
-    // Coloca a primeira linha do programa
-    std::string saida = "MV-EXE\n";
+std::string Montador::gerarPrograma(std::vector<std::string> instrucoes) {
+
     // Coloca a segunda linha do programa
-    saida+=std::to_string(instrucoes.size());
-    saida+=" 0 ";
-    saida+=std::to_string(instrucoes.size()+1000)  + " "; // Considera uma pilha de tamanho 1000
+    saida+=std::to_string(instrucoes.size()) + " ";
     saida+=std::to_string(this->constantesInicio) + "\n"; // Considera as constantes no ínicio do programa
-    // Coloca os inteiros das operações do programa
-    for(int inteiro : instrucoes) {
-        saida+=std::to_string(inteiro) + " ";
+    // Coloca os valores das operações do programa
+    for(std::string valor : instrucoes) {
+        saida+= valor + " ";
     }
     saida+= "\n";
+    saida+= this->tabelaSimbolos.toString();
+    // Coloca a tabela de símbolos
     // Retorna a string corresponde ao programa na linguagem de máquina do emulador
     return saida;
 }
