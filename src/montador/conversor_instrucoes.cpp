@@ -16,19 +16,19 @@ bool ehNumero(std::string& s) {
 std::string Conversor::converterOperando(std::string operando, TabelaSimbolos& tabela, int& linhaAtual) {
     // Verifica se o operando é um registrador
     if(operando == "R0") {
-        return 0;
+        return "0";
     }
 
     if(operando == "R1") {
-        return 1;
+        return "1";
     }
     
     if(operando == "R2") {
-        return 2;
+        return "2";
     }
 
     if(operando == "R3") {
-        return 3;
+        return "3";
     }
 
     // Verifica se o operando é um label do próprio programa
