@@ -215,5 +215,5 @@ std::vector<std::string> Conversor::converterInstrucao(std::vector<std::string> 
     // ela é uma constante criada por um WORD
     linhaAtual+=1;
     constantesVistas++; // Incrementa o contador de constantes vistas
-    return {stoi(mnemonico)};
+    return mnemonico;
 }
