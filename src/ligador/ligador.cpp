@@ -14,7 +14,7 @@ void Ligador::adicionarPrograma(std::string arquivo) {
 
     while(!leitor.arquivoLidoAteFim()) {
         std::vector<std::string> entradaTabela = separaPalavras(leitor.obterProximaLinha());
-        if(entradaTabela[1] == "ext") continue;
+        if(entradaTabela.empty() || entradaTabela[1] == "ext") continue;
         std::string valorSimbolo = std::to_string(stoi(entradaTabela[1])+deslocamentoAtual);
         this->tabela.salvarSimbolo(entradaTabela[0],valorSimbolo);
     }
@@ -47,7 +47,7 @@ std::string Ligador::gerarCodigoMaquinaFinal() {
     saida += std::to_string(deslocamento);
     saida += " 0 ";
     saida += std::to_string(deslocamento+1000)  + " "; // Considera uma pilha de tamanho 1000
-    saida += this->tabela.obterValorSimbolo("MAIN") + "\n"; // Considera as constantes no ínicio do programa
+    saida += this->tabela.obterValorSimbolo("main") + "\n"; // Considera as constantes no ínicio do programa
     // Coloca as strings das operações do programa
     for(std::string valor : programas) {
         saida += valor + " ";
