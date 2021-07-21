@@ -1,13 +1,11 @@
 #include <iostream>
 
-#include "montador.h"
+#include "ligador.h"
 
 int main(int argc, char *argv[]) {
-    std::string arquivo = argv[1];
-    Montador montador(arquivo);
-    auto tokens = montador.executarPassoUm();
-    auto resultado = montador.executarPassoDois(tokens);
-    std::string programa = montador.gerarPrograma(resultado);
-    std::cout << programa; // Exibe o programa gerado pelo montador
-    return 0;
+    Ligador ligador;
+    for(int i = 1; i < argc; i++){
+        ligador.adicionarPrograma(argv[i]);
+    }
+    std::cout << ligador.gerarCodigoMaquinaFinal();
 }
