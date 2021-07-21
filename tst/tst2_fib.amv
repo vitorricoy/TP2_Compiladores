@@ -1,0 +1,28 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;; Função que recebe um inteiro "n" e imprime o     ;;;;;;;
+;;;;;;; n-ésimo número de Fibonacci                      ;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+const1: WORD 1
+const0: WORD 0
+fib: LOAD R0 n           ; Recebe o inteiro n e armazena no registrador 0
+     LOAD R1 const0      ; Carrega 0 no registrador R1
+     LOAD R2 const1      ; Carrega 1 no registrador R2
+
+     COPY R3 R0          ; Copia n para R3 para verificar se n é zero
+     ADD R3 R3           ; Soma n com ele mesmo
+     JZ nIgualAZero      ; Se o resultado da soma for 0, n é zero
+
+     LOAD R3 const1      ; Carrega 1 no registrador R3
+
+     loop:  PUSH R2      ; Salva o valor de R2 na pilha
+     ADD R2 R1           ; Soma R1 em R2
+     POP R1              ; Salva em R1 o antigo valor de R2
+     SUB R0 R3           ; Subtrai 1 de n
+     JZ nIgualAZero      ; Se n é igual a zero
+     JUMP loop           ; Retorna ao loop caso n seja diferente de zero
+
+     nIgualAZero: WRITE R1 ; Escreve o resultado
+     RET                   ; Finaliza a execução do programa
+END
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
