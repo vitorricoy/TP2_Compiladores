@@ -103,7 +103,7 @@ std::vector<std::string> Montador::executarPassoDois(std::vector<std::vector<std
 
 std::string Montador::gerarPrograma(std::vector<std::string> instrucoes) {
     // Coloca a segunda linha do programa
-    std::string saida = =std::to_string(instrucoes.size()) + " ";
+    std::string saida = std::to_string(instrucoes.size()) + " ";
     saida+=std::to_string(this->constantesInicio) + "\n"; // Considera as constantes no ínicio do programa
     // Coloca os valores das operações do programa
     for(std::string valor : instrucoes) {
