@@ -2,12 +2,8 @@
 ########################### Parametros de Projeto #############################
 ###############################################################################
 
-# TODO: altere a extensão dos arquivos (c ou cpp)
-EXT = cpp
-# TODO: altere a lista de forma que contenha todos os arquivos .cpp
-#       do seu projeto (sem a extensão), que deve estar no diretório 
-#       src/
-SRCS_LIGADOR = $(patsubst %,%.$(EXT),main ligador)
+
+SRCS_LIGADOR = $(patsubst %,%.$(EXT),main ligador montador tabela_simbolos leitor_arquivos util conversor_instrucoes)
 OBJS_LIGADOR = $(patsubst %,build/%.o,$(basename $(SRCS_LIGADOR)))
 
 ###############################################################################
