@@ -17,8 +17,8 @@ class Montador {
     public:
         Montador(std::string arquivoPrograma);
         std::vector<std::vector<std::string>> executarPassoUm();
-        std::vector<int> executarPassoDois(std::vector<std::vector<std::string>> tokens);
-        std::string gerarPrograma(std::vector<int> instrucoes);
+        std::vector<std::string> executarPassoDois(std::vector<std::vector<std::string>> tokens);
+        std::string gerarPrograma(std::vector<std::string> instrucoes);
 
 };
 
