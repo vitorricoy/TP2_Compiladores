@@ -26,15 +26,9 @@ std::string Ligador::gerarCodigoMaquinaFinal() {
     int deslocamento = 0;
     for(unsigned long i=0; i < tamanhoProgramas.size(); i++) {
         for(int j=0; j < tamanhoProgramas[i]; j++) {
-            if(programas[deslocamento + j].front() == 'E') {
-                int posicao = stoi(programas[deslocamento + j].substr(1, programas[deslocamento + j].size()-1));
-                posicao += deslocamento;
-                programas[deslocamento + j] = std::to_string(posicao);
-            }
-
             if(this->tabela.simboloEstaRegistrado(programas[deslocamento + j])) {
                 int aux = stoi(this->tabela.obterValorSimbolo(programas[deslocamento + j])); 
-                aux -= deslocamento + j - 1;
+                aux -= deslocamento + j + 1;
                 programas[deslocamento + j] = std::to_string(aux);
             }
         }

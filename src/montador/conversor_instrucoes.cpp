@@ -34,13 +34,13 @@ std::string Conversor::converterOperando(std::string operando, TabelaSimbolos& t
     // Verifica se o operando é um label do próprio programa
     if(tabela.simboloEstaRegistrado(operando)) {
         int enderecoAlvo = stoi(tabela.obterValorSimbolo(operando))-linhaAtual;
-        return "E"+std::to_string(enderecoAlvo);
+        return std::to_string(enderecoAlvo);
     } else {
         // Se o operando não é um label do próprio programa
         // Verifica se é uma constante ou um label externo
         if(ehNumero(operando)) {
             // O operando é uma posição de memória
-            return "E"+operando;
+            return operando;
         } else {
             // O operando é um label externo
             tabela.salvarSimbolo(operando, "ext");
