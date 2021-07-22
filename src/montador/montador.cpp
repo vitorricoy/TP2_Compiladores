@@ -75,25 +75,10 @@ std::vector<std::string> Montador::executarPassoDois(std::vector<std::vector<std
     std::vector<std::string> resultadoFinal;
     // Inicializa a linha correspondente à instrução atual no programa final
     int linhaAtual = 0;
-    // Inicializa as variáveis responsáveis por identificar quantas constantes 
-    // existem no inicio do programa
-    int constantesInicioAux = 0;
-    bool encontrouConstantesInicio = false;
     // Itera pelas linhas
     for(std::vector<std::string> linha : tokens) {
-        // Salva o valor antigo de constantes no inicio do programa
-        int constantesInicioAntiga = constantesInicioAux;
         // Converte a instrução dessa linha para o código de máquina do emulador
-        std::vector<std::string> codigoMaquina = Conversor::converterInstrucao(linha, this->tabelaSimbolos, linhaAtual, constantesInicioAux);
-        // Se na conversão não foi encontrada constante, já encontrou todas as constantes
-        // no início do programa
-        // Também verifica se já não foram encontradas as constantes do ínicio
-        if(!encontrouConstantesInicio && constantesInicioAntiga == constantesInicioAux) {
-            // Salva o numero de constantes no inicio do programa
-            this->constantesInicio = constantesInicioAntiga;
-            // Determina que já encontrou todas as constantes no inicio do programa
-            encontrouConstantesInicio = true;
-        }
+        std::vector<std::string> codigoMaquina = Conversor::converterInstrucao(linha, this->tabelaSimbolos, linhaAtual);
         // Insere os valores encontrados no programa final
         resultadoFinal.insert(resultadoFinal.end(), codigoMaquina.begin(), codigoMaquina.end());
     }
@@ -102,15 +87,15 @@ std::vector<std::string> Montador::executarPassoDois(std::vector<std::vector<std
 }
 
 std::string Montador::gerarPrograma(std::vector<std::string> instrucoes) {
-    // Coloca a segunda linha do programa
+    // Coloca a primeira linha da saída
     std::string saida = std::to_string(instrucoes.size()) + "\n";
-    // Coloca os valores das operações do programa
+    // Coloca os valores das operações e símbolos na saída
     for(std::string valor : instrucoes) {
         saida+= valor + " ";
     }
     saida+= "\n";
+    // Coloca a tabela de símbolos na saída
     saida+= this->tabelaSimbolos.toString();
-    // Coloca a tabela de símbolos
-    // Retorna a string corresponde ao programa na linguagem de máquina do emulador
+    // Retorna a string corresponde à saída para o ligador
     return saida;
 }

@@ -8,6 +8,6 @@ int main(int argc, char *argv[]) {
     auto tokens = montador.executarPassoUm();
     auto resultado = montador.executarPassoDois(tokens);
     std::string programa = montador.gerarPrograma(resultado);
-    std::cout << programa; // Exibe o programa gerado pelo montador
+    std::cout << programa; // Exibe a saída gerada pelo montador
     return 0;
 }

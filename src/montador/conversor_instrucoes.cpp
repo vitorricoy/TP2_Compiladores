@@ -50,14 +50,14 @@ std::string Conversor::converterOperando(std::string operando, TabelaSimbolos& t
     
 }
 
-std::vector<std::string> Conversor::converterInstrucao(std::vector<std::string> instrucao, TabelaSimbolos& tabela, int& linhaAtual, int& constantesVistas) {
+std::vector<std::string> Conversor::converterInstrucao(std::vector<std::string> instrucao, TabelaSimbolos& tabela, int& linhaAtual) {
     // Salva o mnemonico da instrução
     std::string mnemonico = instrucao[0];
-    // Vetor para salvar os inteiros correspondentes à instrução
+    // Vetor para salvar as strings correspondentes à instrução
     std::vector<std::string> retorno;
     
     // Verifica cada uma das operações e atualiza o contador de linhas,
-    // assim como retorna os inteiros correspondentes
+    // assim como retorna as strings correspondentes
 
     if(mnemonico == "HALT") {
         linhaAtual+=1;

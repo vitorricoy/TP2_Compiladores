@@ -7,5 +7,5 @@ int main(int argc, char *argv[]) {
     for(int i = 1; i < argc; i++){
         ligador.adicionarPrograma(argv[i]);
     }
-    std::cout << ligador.gerarCodigoMaquinaFinal();
+    std::cout << ligador.gerarCodigoMaquinaFinal(); // Gera o código que pode ser executado pelo emulador
 }
